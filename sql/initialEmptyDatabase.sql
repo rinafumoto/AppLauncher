@@ -1,0 +1,27 @@
+BEGIN TRANSACTION;
+
+DROP TABLE IF EXISTS App_old;
+DROP TABLE IF EXISTS Env_old;
+
+ALTER TABLE App RENAME TO App_old;
+ALTER TABLE Env RENAME TO Env_old;
+
+CREATE TABLE 'App' (
+    'Name' TEXT NOT NULL,
+    'Path' TEXT NOT NULL,
+    'Description' TEXT,
+    'Icon' BLOB,
+    'Command' TEXT,
+    'Argument' TEXT,
+    'AppID' INTEGER PRIMARY KEY AUTOINCREMENT
+);
+
+CREATE TABLE 'Env' (
+    'Name' TEXT NOT NULL,
+    'Value' TEXT NOT NULL,
+    'ExeOrder' INTEGER NOT NULL,
+    'EnvID' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'AppID' INTEGER NOT NULL
+);
+
+COMMIT;
